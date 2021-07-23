@@ -1,0 +1,5 @@
+python setup.py sdist --formats=gztar
+
+gcloud beta ai hp-tuning-jobs create --display-name=lab-2 --region=us-central1 --config=hpt-cont-pers.yaml --max-trial-count=4 --parallel-trial-count=2
+
+gcloud builds submit --tag gcr.io/rugged-shell-320613/hp-tuning:v1 .
