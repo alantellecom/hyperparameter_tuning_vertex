@@ -12,11 +12,16 @@ def get_args():
       required=True,
       type=float,
       help='learning rate')
+  parser.add_argument(
+      '--iterations',
+      required=True,
+      type=int,
+      help='iterations')
   args = parser.parse_args()
     
   return args
 
-def model(learning_rate):
+def model(learning_rate,iterations):
     
   df_train = pd.read_csv('gs://hp-tuning-file/train.csv')
   df_validation = pd.read_csv('gs://hp-tuning-file/validation.csv')
@@ -26,7 +31,7 @@ def model(learning_rate):
   X_train = df_train.drop('classEncoder', axis=1)
   y_train = df_train['classEncoder']
 
-  pipeline.set_params(classifier__alpha=learning_rate, classifier__max_iter=70)
+  pipeline.set_params(classifier__alpha=learning_rate, classifier__max_iter=iterations)
   pipeline.fit(X_train, y_train)
 
 
@@ -40,7 +45,7 @@ def model(learning_rate):
 
 def main():
   args = get_args()
-  model(args.learning_rate)
+  model(args.learning_rate,args.iterations)
     
 if __name__ == "__main__":
     main()

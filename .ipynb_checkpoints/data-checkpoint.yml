@@ -1,0 +1,146 @@
+name: "projects/383073583641/locations/us-central1/hyperparameterTuningJobs/6060706004394311680"
+display_name: "lab-1"
+study_spec {
+  metrics {
+    metric_id: "accuracy"
+    goal: MAXIMIZE
+  }
+  parameters {
+    parameter_id: "learning_rate"
+    double_value_spec {
+      min_value: 0.01
+      max_value: 0.03
+    }
+    scale_type: UNIT_LINEAR_SCALE
+  }
+}
+max_trial_count: 4
+parallel_trial_count: 2
+trial_job_spec {
+  worker_pool_specs {
+    machine_spec {
+      machine_type: "n1-standard-4"
+    }
+    replica_count: 1
+    disk_spec {
+      boot_disk_type: "pd-ssd"
+      boot_disk_size_gb: 100
+    }
+    python_package_spec {
+      executor_image_uri: "us-docker.pkg.dev/vertex-ai/training/scikit-learn-cpu.0-23:latest"
+      package_uris: "gs://hp-tuning-file/trainer-0.1.tar.gz"
+      python_module: "trainer.task"
+    }
+  }
+}
+trials {
+  id: "1"
+  state: SUCCEEDED
+  parameters {
+    parameter_id: "learning_rate"
+    value {
+      number_value: 0.019999999999999997
+    }
+  }
+  final_measurement {
+    step_count: 1
+    metrics {
+      metric_id: "accuracy"
+      value: 1.0
+    }
+  }
+  start_time {
+    seconds: 1627052642
+    nanos: 378442465
+  }
+  end_time {
+    seconds: 1627052672
+  }
+}
+trials {
+  id: "2"
+  state: SUCCEEDED
+  parameters {
+    parameter_id: "learning_rate"
+    value {
+      number_value: 0.015430130926002966
+    }
+  }
+  final_measurement {
+    step_count: 1
+    metrics {
+      metric_id: "accuracy"
+      value: 1.0
+    }
+  }
+  start_time {
+    seconds: 1627052642
+    nanos: 378678188
+  }
+  end_time {
+    seconds: 1627052672
+  }
+}
+trials {
+  id: "3"
+  state: SUCCEEDED
+  parameters {
+    parameter_id: "learning_rate"
+    value {
+      number_value: 0.025087602818040473
+    }
+  }
+  final_measurement {
+    step_count: 1
+    metrics {
+      metric_id: "accuracy"
+      value: 0.9333333333333333
+    }
+  }
+  start_time {
+    seconds: 1627052782
+    nanos: 812262526
+  }
+  end_time {
+    seconds: 1627053240
+  }
+}
+trials {
+  id: "4"
+  state: SUCCEEDED
+  parameters {
+    parameter_id: "learning_rate"
+    value {
+      number_value: 0.01
+    }
+  }
+  final_measurement {
+    step_count: 1
+    metrics {
+      metric_id: "accuracy"
+      value: 0.8666666666666667
+    }
+  }
+  start_time {
+    seconds: 1627052784
+    nanos: 423145012
+  }
+  end_time {
+    seconds: 1627052815
+  }
+}
+state: JOB_STATE_SUCCEEDED
+create_time {
+  seconds: 1627052634
+  nanos: 331597000
+}
+start_time {
+  seconds: 1627052637
+}
+end_time {
+  seconds: 1627053365
+}
+update_time {
+  seconds: 1627053369
+  nanos: 927944000
+}

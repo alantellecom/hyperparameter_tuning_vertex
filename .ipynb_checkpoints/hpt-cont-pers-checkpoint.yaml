@@ -10,6 +10,11 @@ studySpec:
       minValue: 0.01
       maxValue: 0.03
     scaleType: UNIT_LINEAR_SCALE
+  - parameterId: iterations
+    integerValueSpec:
+      minValue: 80
+      maxValue: 90
+    scaleType: UNIT_LINEAR_SCALE
 trialJobSpec:
   workerPoolSpecs:
   - machineSpec:
@@ -19,4 +24,4 @@ trialJobSpec:
       #acceleratorCount: 2
     replicaCount: 1
     containerSpec:
-      imageUri: gcr.io/rugged-shell-320613/hp-tuning:v2
+      imageUri: gcr.io/rugged-shell-320613/hp-tuning:v3
