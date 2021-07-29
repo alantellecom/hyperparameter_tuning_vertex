@@ -17,14 +17,26 @@ def get_args():
       required=True,
       type=int,
       help='iterations')
+  parser.add_argument(
+      '--dataset_train_path',
+      required=True,
+      type=str
+  )
+  parser.add_argument(
+      '--dataset_validation_path',
+      required=True,
+      type=str
+  )
+
+
   args = parser.parse_args()
     
   return args
 
-def model(learning_rate,iterations):
+def model(learning_rate,iterations,dataset_train_path,dataset_validation_path):
     
-  df_train = pd.read_csv('gs://hp-tuning-file/train.csv')
-  df_validation = pd.read_csv('gs://hp-tuning-file/validation.csv')
+  df_train = pd.read_csv(dataset_train_path)
+  df_validation = pd.read_csv(dataset_validation_path)
 
   pipeline = Pipeline([('classifier', SGDClassifier(loss='log'))])
 
@@ -45,7 +57,8 @@ def model(learning_rate,iterations):
 
 def main():
   args = get_args()
-  model(args.learning_rate,args.iterations)
+  model(learning_rate=args.learning_rate,iterations=args.iterations,
+                dataset_train_path=args.dataset_train_path,dataset_validation_path=args.dataset_validation_path )
     
 if __name__ == "__main__":
     main()
