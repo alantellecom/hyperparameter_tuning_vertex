@@ -3,3 +3,10 @@ python setup.py sdist --formats=gztar
 gcloud beta ai hp-tuning-jobs create --display-name=lab-5 --region=us-central1 --config=hpt-cont-pers.yaml --max-trial-count=4 --parallel-trial-count=2
 
 gcloud builds submit --tag gcr.io/rugged-shell-320613/hp-tuning:v1 .
+
+
+curl -X POST \
+-H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
+-H "Content-Type: application/json; charset=utf-8" \
+-d @request.json \
+https://us-central1-aiplatform.googleapis.com/v1/projects/rugged-shell-320613/locations/us-central1/trainingPipelines

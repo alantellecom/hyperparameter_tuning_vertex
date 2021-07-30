@@ -1,0 +1,58 @@
+{
+  "displayName": "teste",
+  "trainingTaskDefinition": "gs://google-cloud-aiplatform/schema/trainingjob/definition/hyperparameter_tuning_task_1.0.0.yaml",
+  "trainingTaskInputs": {
+    "studySpec": {
+    "metrics": [
+      {
+        "metricId": "accuracy",
+        "goal": "MAXIMIZE"
+      }
+    ],
+    "parameters": [
+      {
+        "parameterId": "learning_rate",
+        "scaleType": "UNIT_LINEAR_SCALE",
+        "doubleValueSpec": {
+            "minValue": 0.01,
+            "maxValue": 0.04
+        }
+      },
+      { 
+        "parameterId": "iteration",
+        "scaleType": "UNIT_LINEAR_SCALE",
+        "integerValueSpec": {
+            "minValue": 70,
+            "maxValue": 75
+        }
+      }
+    ],
+    "ALGORITHM": "RANDOM_SEARCH"
+  },
+  "maxTrialCount": 4,
+  "parallelTrialCount": 2,
+  "maxFailedTrialCount": 2,
+  "trialJobSpec": {
+      "workerPoolSpecs": [
+        {
+          "machineSpec": {
+            "machineType": "n1-standard-4",
+          },
+          "replicaCount": 1,
+
+          "containerSpec": {
+            "imageUri": "gcr.io/rugged-shell-320613/hp-tuning:v5",
+            "args": ["--dataset_train_path=gs://hp-tuning-file/train.csv", "--dataset_validation_path=gs://hp-tuning-file/validation.csv"]
+          },
+        
+        }
+      ],
+    },
+  },
+  "modelToUpload": {
+    "displayName": "teste",
+    "containerSpec": {
+      "imageUri": "gcr.io/rugged-shell-320613/hp-tuning:v5"
+    }
+  }
+}
